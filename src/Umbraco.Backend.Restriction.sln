@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{C19F9055-36C2-4613-BE0A-BE54C7B147BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.Backend.Restriction.Test", "Umbraco.Backend.Restriction.Test\Umbraco.Backend.Restriction.Test.csproj", "{7762266B-91A4-433A-9DA2-997079429FCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.Backend.Restriction.WebAppTest", "Umbraco.Backend.Restriction.WebAppTest\Umbraco.Backend.Restriction.WebAppTest.csproj", "{F601551B-9BFF-44C1-80B4-3B40E3868C4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.Backend.Restriction", "Umbraco.Backend.Restriction\Umbraco.Backend.Restriction.csproj", "{7E74C8CA-B8F6-4EF9-9EC2-C93E9AEC5F3B}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://172.16.8.89:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Umbraco.Backend.Restriction.Test\\Umbraco.Backend.Restriction.Test.csproj
+		SccProjectTopLevelParentUniqueName1 = Umbraco.Backend.Restriction.sln
+		SccProjectName1 = Umbraco.Backend.Restriction.Test
+		SccLocalPath1 = Umbraco.Backend.Restriction.Test
+		SccProjectUniqueName2 = Umbraco.Backend.Restriction.WebAppTest\\Umbraco.Backend.Restriction.WebAppTest.csproj
+		SccProjectTopLevelParentUniqueName2 = Umbraco.Backend.Restriction.sln
+		SccProjectName2 = Umbraco.Backend.Restriction.WebAppTest
+		SccLocalPath2 = Umbraco.Backend.Restriction.WebAppTest
+		SccProjectUniqueName3 = Umbraco.Backend.Restriction\\Umbraco.Backend.Restriction.csproj
+		SccProjectName3 = Umbraco.Backend.Restriction
+		SccLocalPath3 = Umbraco.Backend.Restriction
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7762266B-91A4-433A-9DA2-997079429FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7762266B-91A4-433A-9DA2-997079429FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7762266B-91A4-433A-9DA2-997079429FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7762266B-91A4-433A-9DA2-997079429FCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F601551B-9BFF-44C1-80B4-3B40E3868C4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F601551B-9BFF-44C1-80B4-3B40E3868C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F601551B-9BFF-44C1-80B4-3B40E3868C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F601551B-9BFF-44C1-80B4-3B40E3868C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E74C8CA-B8F6-4EF9-9EC2-C93E9AEC5F3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E74C8CA-B8F6-4EF9-9EC2-C93E9AEC5F3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E74C8CA-B8F6-4EF9-9EC2-C93E9AEC5F3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E74C8CA-B8F6-4EF9-9EC2-C93E9AEC5F3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7762266B-91A4-433A-9DA2-997079429FCA} = {C19F9055-36C2-4613-BE0A-BE54C7B147BA}
+		{F601551B-9BFF-44C1-80B4-3B40E3868C4D} = {C19F9055-36C2-4613-BE0A-BE54C7B147BA}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,17 @@
+﻿{
+  "RegexForbiddenRoutes": [
+    {
+      "pattern": "^\\/umbraco\\/.*(\\.aspx|\\.asmx|\\.ashx)$",
+      "options": 1,
+      "matchTimeout": -10000
+    }
+  ],
+  "SafeHosts": [
+	/*For exclude port 80, otherwise: "allowed.local:1520"*/
+    "allowed.local:18077",
+	"ONE.SecuRe.largeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.hoSt:18077"
+  ],
+  "SafeIps": [
+    /*"127.0.0.1" , "198.168.1.1", "::1"*/
+  ]
+}
