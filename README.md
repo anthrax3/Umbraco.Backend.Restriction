@@ -1,4 +1,4 @@
-Umbraco.Backend.Restriction
+Umbraco Backend Restriction
 =========
 
 This HttpModule, was made to restrict the access to the ADMIN part of the CMS, and other sensibles resources that you don't want share with Front End users.
