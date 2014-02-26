@@ -12,25 +12,25 @@ Installation
 * Add ``BackendRestriction.json`` to umbraco config folder **~/Config**
 * Register the HttpModule on your **web.config**; to keep compatibility with new/old iis the module is registered twice:
     * under ``<system.webServer>`` element:
-```
-<system.webServer>
-    <modules runAllManagedModulesForAllRequests="true">
-        <add type="Umbraco.Backend.Restriction.Backend, Umbraco.Backend.Restriction" name="Backend" />
-        ...
-    </modules>
-    ...
-</system.webServer>
-```
-    * under ``<system.web>`` element:
-```
-  <system.web>
-        <httpModules>
-            <add type="Umbraco.Backend.Restriction.Backend, Umbraco.Backend.Restriction" name="Backend" />
+    ```
+        <system.webServer>
+            <modules runAllManagedModulesForAllRequests="true">
+                <add type="Umbraco.Backend.Restriction.Backend, Umbraco.Backend.Restriction" name="Backend" />
+                ...
+            </modules>
             ...
-        </httpModules>
-        ...
-  </system.web>
-```
+        </system.webServer>
+    ```
+    * under ``<system.web>`` element:
+    ```
+        <system.web>
+            <httpModules>
+                <add type="Umbraco.Backend.Restriction.Backend, Umbraco.Backend.Restriction" name="Backend" />
+                ...
+            </httpModules>
+            ...
+        </system.web>
+    ```
 
 Settings
 --
