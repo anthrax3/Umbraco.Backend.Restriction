@@ -13,23 +13,23 @@ Installation
 * Register the HttpModule on your **web.config**; to keep compatibility with new/old iis the module is registered twice:
     * under ``<system.webServer>`` element:
     ```
-        <system.webServer>
-            <modules runAllManagedModulesForAllRequests="true">
-                <add type="Umbraco.Backend.Restriction.Backend, Umbraco.Backend.Restriction" name="Backend" />
-                ...
-            </modules>
+    <system.webServer>
+        <modules runAllManagedModulesForAllRequests="true">
+            <add type="Umbraco.Backend.Restriction.Backend, Umbraco.Backend.Restriction" name="Backend" />
             ...
-        </system.webServer>
+        </modules>
+        ...
+    </system.webServer>
     ```
     * under ``<system.web>`` element:
     ```
-        <system.web>
-            <httpModules>
-                <add type="Umbraco.Backend.Restriction.Backend, Umbraco.Backend.Restriction" name="Backend" />
-                ...
-            </httpModules>
+    <system.web>
+        <httpModules>
+            <add type="Umbraco.Backend.Restriction.Backend, Umbraco.Backend.Restriction" name="Backend" />
             ...
-        </system.web>
+        </httpModules>
+        ...
+    </system.web>
     ```
 
 Settings
