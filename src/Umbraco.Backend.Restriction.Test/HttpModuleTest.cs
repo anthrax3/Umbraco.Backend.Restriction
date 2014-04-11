@@ -17,7 +17,7 @@ namespace Umbraco.Backend.Restriction.Test
         private const string PORT = "18077";
         private static Uri baseUri = new Uri(BASE_URL + ":" + PORT);
 
-        [SetUp]
+        
         public void Check()
         {
             try
@@ -200,50 +200,90 @@ namespace Umbraco.Backend.Restriction.Test
         }
 
         [Test]
-        public void Restricted_UnSafeHost_ServicesPath()
-        {
-            
+        [TestCase(
+            "localhost",
+            "umbraco/plugins/DigibizAdvancedMediaPicker/DigibizService.asmx/GetInitDigibizTreeData",
+            Result = HttpStatusCode.Forbidden,
+            TestName = "Restricted un Safe Host: localhost, resource: DigibizService.")]
+        [TestCase(
+            "localhost",
+            "umbraco/webservices/TreeDataService.ashx?rnd=cab48ce11f0947a59c64d7c37483063f&id=-1&treeType=DigibizMediaTree&contextMenu=false&isDialog=true&dialogMode=id&nodeKey=1000&rnd2=75.1",
+            Result = HttpStatusCode.Forbidden,
+            TestName = "Restricted un Safe Host: localhost, resource: TreeDataService.")]
+        [TestCase(
+            "localhost",
+            "umbraco/plugins/DigibizAdvancedMediaPicker/DigibizService.asmx/GetPickerData",
+            Result = HttpStatusCode.Forbidden,
+            TestName = "Restricted un Safe Host: localhost, resource: GetPickerData.")]
+        [TestCase(
+            "localhost",
+            "umbraco/webservices/legacyAjaxCalls.asmx/GetSecondsBeforeUserLogout",
+            Result = HttpStatusCode.Forbidden,
+            TestName = "Restricted un Safe Host: localhost, resource: GetSecondsBeforeUserLogout.")]
+        [TestCase(
+            "localhost",
+            "umbraco/plugins/DigibizAdvancedMediaPicker/SelectMediaItem.aspx?startNodeId=-1&allowedExtensions=&allowedMediaTypes=1032&selectMultipleNodes=False&cropPropertyAlias=&cropName=&searchEnabled=True&autoSuggestEnabled=False&searchMethod=all&rndo=54.6",
+            Result = HttpStatusCode.Forbidden,
+            TestName = "Restricted un Safe Host: localhost, resource: SelectMediaItem.")]
 
+        [TestCase(
+            "not.allowed.local",
+            "umbraco/plugins/DigibizAdvancedMediaPicker/DigibizService.asmx/GetInitDigibizTreeData",
+            Result = HttpStatusCode.Forbidden,
+            TestName = "Restricted un Safe Host: not.allowed.local, resource: DigibizService.")]
+        [TestCase(
+            "not.allowed.local",
+            "umbraco/webservices/TreeDataService.ashx?rnd=cab48ce11f0947a59c64d7c37483063f&id=-1&treeType=DigibizMediaTree&contextMenu=false&isDialog=true&dialogMode=id&nodeKey=1000&rnd2=75.1",
+            Result = HttpStatusCode.Forbidden,
+            TestName = "Restricted un Safe Host: not.allowed.local, resource: TreeDataService.")]
+        [TestCase(
+            "not.allowed.local",
+            "umbraco/plugins/DigibizAdvancedMediaPicker/DigibizService.asmx/GetPickerData",
+            Result = HttpStatusCode.Forbidden,
+            TestName = "Restricted un Safe Host: not.allowed.local, resource: GetPickerData.")]
+        [TestCase(
+            "not.allowed.local",
+            "umbraco/webservices/legacyAjaxCalls.asmx/GetSecondsBeforeUserLogout",
+            Result = HttpStatusCode.Forbidden,
+            TestName = "Restricted un Safe Host: not.allowed.local, resource: GetSecondsBeforeUserLogout.")]
+        [TestCase(
+            "not.allowed.local",
+            "umbraco/plugins/DigibizAdvancedMediaPicker/SelectMediaItem.aspx?startNodeId=-1&allowedExtensions=&allowedMediaTypes=1032&selectMultipleNodes=False&cropPropertyAlias=&cropName=&searchEnabled=True&autoSuggestEnabled=False&searchMethod=all&rndo=54.6",
+            Result = HttpStatusCode.Forbidden,
+            TestName = "Restricted un Safe Host: not.allowed.local, resource: SelectMediaItem.")]
+        public HttpStatusCode Restricted_UnSafeHost_ServicesPath(string host, string uri)
+        {
             HttpWebRequest request = null;
 
-            Uri testUri = new Uri(baseUri, "umbraco/plugins/DigibizAdvancedMediaPicker/DigibizService.asmx/GetInitDigibizTreeData");
-            Uri testUri_2 = new Uri(baseUri, "umbraco/webservices/TreeDataService.ashx?rnd=cab48ce11f0947a59c64d7c37483063f&id=-1&treeType=DigibizMediaTree&contextMenu=false&isDialog=true&dialogMode=id&nodeKey=1000&rnd2=75.1");
-            Uri testUri_3 = new Uri(baseUri, "umbraco/plugins/DigibizAdvancedMediaPicker/DigibizService.asmx/GetPickerData");
-            Uri testUri_4 = new Uri(baseUri, "umbraco/webservices/legacyAjaxCalls.asmx/GetSecondsBeforeUserLogout");
-            Uri testUri_5 = new Uri(baseUri, "umbraco/plugins/DigibizAdvancedMediaPicker/SelectMediaItem.aspx?startNodeId=-1&allowedExtensions=&allowedMediaTypes=1032&selectMultipleNodes=False&cropPropertyAlias=&cropName=&searchEnabled=True&autoSuggestEnabled=False&searchMethod=all&rndo=54.6");
-
-
-            request = GetRequest(testUri, "GET", "localhost", PORT);
-            EnsureStatus(HttpStatusCode.Forbidden, request);
-
-            request = GetRequest(testUri_2, "GET", "localhost", PORT);
-            EnsureStatus(HttpStatusCode.Forbidden, request);
-
-            request = GetRequest(testUri_3, "GET", "localhost", PORT);
-            EnsureStatus(HttpStatusCode.Forbidden, request);
-
-            request = GetRequest(testUri_4, "GET", "localhost", PORT);
-            EnsureStatus(HttpStatusCode.Forbidden, request);
-
-            request = GetRequest(testUri_5, "GET", "localhost", PORT);
-            EnsureStatus(HttpStatusCode.Forbidden, request);
-
-
-            request = GetRequest(testUri, "GET", "not.allowed.local", PORT);
-            EnsureStatus(HttpStatusCode.Forbidden, request);
-
-            request = GetRequest(testUri_2, "GET", "not.allowed.local", PORT);
-            EnsureStatus(HttpStatusCode.Forbidden, request);
-
-            request = GetRequest(testUri_3, "GET", "not.allowed.local", PORT);
-            EnsureStatus(HttpStatusCode.Forbidden, request);
-
-            request = GetRequest(testUri_4, "GET", "not.allowed.local", PORT);
-            EnsureStatus(HttpStatusCode.Forbidden, request);
-
-            request = GetRequest(testUri_5, "GET", "not.allowed.local", PORT);
-            EnsureStatus(HttpStatusCode.Forbidden, request);
+            request = GetRequest(new Uri(baseUri, uri), "GET", host, PORT);
+            return GetHttpStatus(request);
         }
+
+        [TestCase(
+            "not.allowed.local",
+            "test",
+            "user",
+            "pinocho",
+            Result = HttpStatusCode.Unauthorized,
+            TestName = "Restricted by basic auth - wrong credentials")]
+        [TestCase(
+            "not.allowed.local",
+            "test",
+            "user",
+            "pass",
+            Result = HttpStatusCode.OK,
+            TestName = "Restricted by basic auth - OK credentials")]
+        [Ignore]
+        public HttpStatusCode Restricted_By_BasicAuth(string host, string uri, string user, string pass)
+        {
+            HttpWebRequest request = null;
+            NetworkCredential myCreds = new NetworkCredential(user, pass);
+
+            request = GetRequest(new Uri(baseUri, uri), "GET", host, PORT, myCreds);
+            return GetHttpStatus(request);
+        }
+
+        
 
         [Test]
         public void Allowed_FrontEnd_Navigation()
@@ -370,8 +410,29 @@ namespace Umbraco.Backend.Restriction.Test
             }
         }
 
+        private HttpStatusCode GetHttpStatus(HttpWebRequest request)
+        {
+            HttpStatusCode result = HttpStatusCode.BadRequest;
+            try
+            {
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    result = response.StatusCode;
+                }
+            }
+            catch (WebException ex)
+            {
+                using (WebResponse response = ex.Response)
+                {
+                    HttpWebResponse httpResponse = (HttpWebResponse)response;
+                    result = httpResponse.StatusCode;
+                }
+            }
+            return result;
+        }
 
-        private HttpWebRequest GetRequest(Uri url, string method = null, string host = null, string port = null)
+
+        private HttpWebRequest GetRequest(Uri url, string method = null, string host = null, string port = null, NetworkCredential credentials = null)
         {
             HttpWebRequest request = null;
 
@@ -379,6 +440,7 @@ namespace Umbraco.Backend.Restriction.Test
             request.Host = host != null ? host : request.Host;
             request.Host += port != null ? ":"+port : string.Empty;
             request.Method = method != null ? method : request.Method;
+            request.Credentials = credentials;
 
             return request;
         }
