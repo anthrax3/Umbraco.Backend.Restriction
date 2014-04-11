@@ -52,7 +52,12 @@ The module works with a set of rules/parametters specified in the config file ``
   ],
   "SafeIps": [
     "127.0.0.1" , "198.168.1.110"
-  ]
+  ],
+  "BasicAuthUsers": {
+    "user": "pass",
+    "rambo": "john"
+  },
+  "UseBasicAuth" : false
 }
 ```
 * **RegexForbiddenRoutes**:
@@ -61,8 +66,13 @@ The module works with a set of rules/parametters specified in the config file ``
     Array of safe hosts that have granted acces to forbbiden routes, if the port is anything buy ``80`` you need to append it after the host.
 * **SafeIps**:
     Array of safe IPs that have granted acces to forbbiden routes.
+* **UseBasicAuth**:
+    Enables basic auth before host/ip check.
+* **BasicAuthUsers**:
+    Array of users to check when basic auth is *true*.
 
-*You can have both *SafeIps* and *SafeHosts* on the same config, but only one is required.*
+* *You can have both *SafeIps* and *SafeHosts* on the same config, but only one is required.*
+* *Basic Auth feature is not recomended for production eviroment, is just another restriction layer to use as an example.*
 
 Use, debug, modify the source code.
 --
