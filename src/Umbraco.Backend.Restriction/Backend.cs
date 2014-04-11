@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using Newtonsoft.Json;
 using System.IO;
+using System.Text;
 
 namespace Umbraco.Backend.Restriction
 {
@@ -36,6 +37,9 @@ namespace Umbraco.Backend.Restriction
                 {
                     Config.ConfigFileFullPath = app.Server.MapPath(CONFIG_FILE);
                 }
+
+                if (Config.Settings.UseBasicAuth)
+                    SetBasicAuth(app);
 
                 //1. check for not allowed host/ip
                 if (!Config.Settings.SafeHosts.Any(h => app.Context.Request.ServerVariables["HTTP_HOST"].Equals(h, StringComparison.InvariantCultureIgnoreCase))
@@ -85,7 +89,47 @@ namespace Umbraco.Backend.Restriction
                     );
         }
 
+        private void SetBasicAuth(HttpApplication app)
+        {
+            string authorisationHeader = app.Context.Request.ServerVariables["HTTP_AUTHORIZATION"];
+
+            if (authorisationHeader != null && authorisationHeader.StartsWith("Basic ", StringComparison.InvariantCultureIgnoreCase))
+            {
+                string authorizationParameters = Encoding.Default.GetString(Convert.FromBase64String(authorisationHeader.Substring("Basic ".Length)));
+                string userName = authorizationParameters.Split(':')[0];
+                string password = authorizationParameters.Split(':')[1];
+
+                if (Config.Settings.BasicAuthUsers != null && 
+                    Config.Settings.BasicAuthUsers.ContainsKey(userName) && 
+                    Config.Settings.BasicAuthUsers[userName].Equals(password)) //Perform your actual "login" check here.
+                {
+                    //Authorised!
+                    //Page loads as normal.
+                }
+                else
+                {
+                    app.Context.Response.AddHeader("WWW-Authenticate", "Basic");
+                    app.Context.Response.Status = "401 Unauthorized";
+                    app.Context.Response.End();
+                }
+            }
+            else
+            {
+                app.Context.Response.AddHeader("WWW-Authenticate", "Basic");
+                app.Context.Response.Status = "401 Unauthorized";
+                app.Context.Response.End();
+            }
+        }
+
+        private void Unauthorised()
+        {
+            
+        }
+
     }
+
+
+    
 
     public static class Config
     {
@@ -115,5 +159,7 @@ namespace Umbraco.Backend.Restriction
         public List<Regex> RegexForbiddenRoutes { get; set; }
         public List<string> SafeHosts { get; set; }
         public List<string> SafeIps { get; set; }
+        public bool UseBasicAuth { get; set; }
+        public Dictionary<string,string> BasicAuthUsers { get; set; }
     }
 }

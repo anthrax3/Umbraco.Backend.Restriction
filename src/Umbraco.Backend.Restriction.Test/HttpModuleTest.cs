@@ -126,7 +126,7 @@ namespace Umbraco.Backend.Restriction.Test
         }
 
         [Test]
-        [Ignore]
+        [Ignore("cant emulate another IP")]
         public void Restricted_SafeIp_CommonPath()
         {
             
